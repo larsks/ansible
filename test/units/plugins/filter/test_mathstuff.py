@@ -168,3 +168,19 @@ class TestRekeyOnMember():
         list_original = ({'proto': 'eigrp', 'id': 1}, {'proto': 'ospf', 'id': 2}, {'proto': 'eigrp', 'id': 3})
         expected = {'eigrp': {'proto': 'eigrp', 'id': 3}, 'ospf': {'proto': 'ospf', 'id': 2}}
         assert ms.rekey_on_member(list_original, 'proto', duplicates='overwrite') == expected
+
+
+class TestZip():
+    def test_zip(self):
+        original = [
+            ['a1', 'a2', 'a3'],
+            ['b1', 'b2', 'b3'],
+            ['c1', 'c2', 'c3'],
+        ]
+        expected = [
+            ('a1', 'b1', 'c1'),
+            ('a2', 'b2', 'c2'),
+            ('a3', 'b3', 'c3'),
+        ]
+
+        assert list(ms.zip_together(original)) == expected

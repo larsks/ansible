@@ -220,6 +220,14 @@ def rekey_on_member(data, key, duplicates='error'):
     return new_obj
 
 
+def zip_together(v):
+    return zip(*v)
+
+
+def zip_longest_together(v, fillvalue=None):
+    return zip_longest(*v, fillvalue=fillvalue)
+
+
 class FilterModule(object):
     ''' Ansible math jinja2 filters '''
 
@@ -254,6 +262,8 @@ class FilterModule(object):
             # zip
             'zip': zip,
             'zip_longest': zip_longest,
+            'zip_together': zip_together,
+            'zip_longest_together': zip_longest_together,
 
         }
 
