@@ -1232,6 +1232,16 @@ DEFAULT_VAULT_PASSWORD_FILE:
   - {key: vault_password_file, section: defaults}
   type: path
   yaml: {key: defaults.vault_password_file}
+VAULT_STATIC_SALT:
+  name: Use static salt
+  description: Use static salt when vault encrypting files
+  default: False
+  env: [{name: ANSIBLE_VAULT_STATIC_SALT}]
+  ini:
+    - key: vault_static_salt
+      section: defaults
+  yaml:
+    key: defaults.valt_use_static_salt
 DEFAULT_VERBOSITY:
   name: Verbosity
   default: 0

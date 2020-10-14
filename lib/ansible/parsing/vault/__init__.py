@@ -1266,7 +1266,14 @@ class VaultAES256:
     def encrypt(cls, b_plaintext, secret):
         if secret is None:
             raise AnsibleVaultError('The secret passed to encrypt() was None')
-        b_salt = os.urandom(32)
+        if C.config.get_config_value('VAULT_STATIC_SALT'):
+            content_hash_maker = hashes.Hash(hashes.SHA512(), default_backend())
+            content_hash_maker.update(b_plaintext)
+            content_hash = content_hash_maker.finalize()
+            b_salt = content_hash[-32:]
+        else:
+            b_salt = os.urandom(32)
+
         b_password = secret.bytes
         b_key1, b_key2, b_iv = cls._gen_key_initctr(b_password, b_salt)
 
